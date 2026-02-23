@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>RGB App</title>
+        <link rel="stylesheet" href="style.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <script src="https://kit.fontawesome.com/48e00764d4.js"
+            crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <h1>RGB Color Mixer</h1>
+        <div class="colors">
+            <div class="red-container" id="red-color">
+                <button onclick="changeColorRed()">Click Me</button>
+                <p id="red-result"></p>
+            </div>
+            <div class="green-container" id="green-color">
+                <button onclick="changeColorGreen()">Click Me</button>
+                <p id="green-result"></p>
+            </div>
+            <div class="blue-container" id="blue-color">
+                <button onclick="changeColorBlue()">Click Me</button>
+                <p id="blue-result"></p>
+            </div>
+        </div>
+        <div class="mix-container" id="mixed-color">
+            <input type="number" id="red-input" placeholder="Red">
+            <input type="number" id="green-input" placeholder="Green">
+            <input type="number" id="blue-input" placeholder="Blue">
+            <button onclick="changeBackground()">Click Me</button>
+        </div>
+        <div class="mixed-container" id="all-color">
+            <button onclick="mixAllColor()">Click Me</button>
+            <p id="all-result"></p>
+        </div>
+        <button onclick="resetAll()"><i class="fa-solid fa-arrow-rotate-right"></i></button>
+    </body>
+</html>
+<script>
+
+    let redCircle = document.getElementById('red-color');
+    let greenCircle = document.getElementById('green-color');
+    let blueCircle = document.getElementById('blue-color');
+    let MixedCircle = document.getElementById('all-color');
+
+    let redResult = document.getElementById('red-result');
+    let greenResult = document.getElementById('green-result');
+    let blueResult = document.getElementById('blue-result');
+    let allResult = document.getElementById('all-result');
+    
+    let redInput = document.getElementById('red-input');
+    let greenInput = document.getElementById('green-input');
+    let blueInput = document.getElementById('blue-input');
+
+    function changeColorRed() {
+        let rgbColorRed = Math.floor(Math.random() * 256);
+        let rgbColorGreen = 0;
+        let rgbColorBlue = 0;
+        //const rgbColorGreen = Math.floor(Math.random() * 256);
+        //const rgbColorBlue = Math.floor(Math.random() * 256);
+
+        redCircle.style.backgroundColor = `rgb(${rgbColorRed}, ${rgbColorGreen}, ${rgbColorBlue})`;
+        redResult.innerHTML = `Red: ${rgbColorRed}, ${rgbColorGreen}, ${rgbColorBlue}`;
+        redInput.value = rgbColorRed;
+        //.body.style.backgroundColor = `rgb(${rgbColorRed}, ${rgbColorBlue}, ${rgbColorGreen})`;
+    }
+    function changeColorGreen() {
+        const rgbColorRed = 0;
+        const rgbColorGreen= Math.floor(Math.random() * 256);
+        const rgbColorBlue = 0;
+
+        greenCircle.style.backgroundColor = `rgb(${rgbColorRed}, ${rgbColorGreen}, ${rgbColorBlue})`;
+        greenResult.innerHTML = `Green: ${rgbColorRed}, ${rgbColorGreen}, ${rgbColorBlue}`;
+        greenInput.value = rgbColorGreen;
+    }
+    function changeColorBlue() {
+        const rgbColorRed = 0;
+        const rgbColorGreen= 0;
+        const rgbColorBlue = Math.floor(Math.random() * 256);
+
+        blueCircle.style.backgroundColor = `rgb(${rgbColorRed}, ${rgbColorGreen}, ${rgbColorBlue})`;
+        blueResult.innerHTML = `Blue: ${rgbColorRed}, ${rgbColorGreen}, ${rgbColorBlue}`;
+        blueInput.value = rgbColorBlue;
+    }
+    function changeBackground() {
+        if (!redInput.value || !greenInput.value || !blueInput.value) {
+            alert('Please input a value first or make use the buttons above to generate a color');
+        }
+        else if (redInput.value < 0 || redInput.value > 255 || greenInput.value < 0 || greenInput.value > 255 || blueInput.value < 0 || blueInput.value > 255) {
+            alert('Please input a number between 0-255');
+        }
+        else {
+            document.body.style.backgroundColor = `rgb(${redInput.value}, ${greenInput.value}, ${blueInput.value})`;
+        }
+    }
+    function mixAllColor() {
+        const rgbColorRed = Math.floor(Math.random() * 256);
+        const rgbColorGreen= Math.floor(Math.random() * 256);
+        const rgbColorBlue = Math.floor(Math.random() * 256);
+
+        MixedCircle.style.backgroundColor = `rgb(${rgbColorRed}, ${rgbColorGreen}, ${rgbColorBlue})`;
+        allResult.innerHTML = `RGB: ${rgbColorRed}, ${rgbColorGreen}, ${rgbColorBlue}`;
+    }
+    function resetAll() {
+        document.body.style.backgroundColor = 'white';
+
+        redCircle.style.backgroundColor = 'bisque';
+        greenCircle.style.backgroundColor = 'bisque';
+        blueCircle.style.backgroundColor = 'bisque';
+        MixedCircle.style.backgroundColor = 'bisque';
+
+        redResult.innerHTML = '';
+        greenResult.innerHTML = '';
+        blueResult.innerHTML = '';
+        allResult.innerHTML = '';
+
+        redInput.value = '';
+        greenInput.value = '';
+        blueInput.value = '';
+    }
+</script>
